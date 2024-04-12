@@ -14,7 +14,7 @@ test-commit:
 empty-commit:
 	GIT_AUTHOR_DATE="Thu, 01 Jan 1970 00:00:00 +0000" GIT_COMMITTER_DATE="Thu, 01 Jan 1970 00:00:00 +0000" git commit --allow-empty -m 'empty commit'
 install:
-	apt-get install make || brew install make || winget install ezwinports.make
+	apt-get install make pandoc || brew install make pandoc || winget install ezwinports.make && winget install -e --id JohnMacFarlane.Pandoc
 submodules:
 	git submodule update --init --recursive
 branch:
@@ -25,9 +25,16 @@ branch-sort: branch
 push:push--all-f
 push--all-f:
 	git push --all -f
-readme:
+readme:empty-commit
+	echo >> README.md
 	echo $(shell git rev-parse --short HEAD~1) >> README.md
 	echo $@  >> README.md
+	echo >> README.md
+	git add README.md
+	$(MAKE) test-commit
 	$(MAKE) branch tag
+index:readme
+	pandoc README.md --from markdown --to html >> index.html
+serve:server
 server:
 	 source .functions && server
