@@ -1,3 +1,4 @@
+SHELL := $(shell which bash)
 default:
 	 git branch --set-upstream-to=origin/master master
 	 git remote add upstream git@github.com:RandyMcMillan/git_workshop.git 2>/dev/null || \
@@ -5,7 +6,9 @@ default:
 		 true
 tag:
 	## remove shell from commands to use in the terminal
-	git tag -f $(shell git rev-parse --short HEAD~1)=$(date +%s) && git tag
+	git tag -f $(shell git rev-parse --short HEAD~1)-$(shell date +%s)
+tags-delete:
+	for t in $(shell git tag);do git tag -d $$t;done
 test-commit:
 	git commit -m "test commit" --allow-empty
 empty-commit:
@@ -24,4 +27,7 @@ push--all-f:
 	git push --all -f
 readme:
 	echo $(shell git rev-parse --short HEAD~1) >> README.md
+	echo $@  >> README.md
 	$(MAKE) branch tag
+server:
+	 source .functions && server
