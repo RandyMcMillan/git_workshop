@@ -14,3 +14,6 @@ install:
 	apt-get install make || brew install make || winget install ezwinports.make
 submodules:
 	git submodule update --init --recursive
+branch:
+	git checkout -b topic-branch-$(shell date +%s) || git checkout -b topic-branch-$^
+	git branch -a
