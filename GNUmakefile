@@ -17,6 +17,8 @@ submodules:
 branch:
 	git checkout -b topic-branch-$(shell date +%s) || git checkout -b topic-branch-$^
 	#git branch -a
+branch-sort: branch
+	 git branch -a | sort || true
 push:push--all-f
 push--all-f:
 	git push --all -f
