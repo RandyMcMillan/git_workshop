@@ -26,9 +26,10 @@ push:push--all-f
 push--all-f:
 	git push --all -f
 readme:
-	echo $@  >> README.md
+	echo >> README.md
 	echo $(shell git rev-parse --short HEAD~1) >> README.md
 	echo $@  >> README.md
+	echo >> README.md
 	$(MAKE) branch tag
 index:readme
 	pandoc README.md --from markdown --to html >> index.html
