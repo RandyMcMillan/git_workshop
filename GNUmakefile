@@ -30,6 +30,8 @@ readme:
 	echo $(shell git rev-parse --short HEAD~1) >> README.md
 	echo $@  >> README.md
 	echo >> README.md
+	git add README.md
+	$(MAKE) test-commit
 	$(MAKE) branch tag
 index:readme
 	pandoc README.md --from markdown --to html >> index.html
