@@ -5,7 +5,7 @@ default:
 		 true
 tag:
 	## remove shell from commands to use in the terminal
-	git tag -f $(shell git rev-parse --short HEAD~1) && git tag
+	git tag -f $(shell git rev-parse --short HEAD~1)=$(date +%s) && git tag
 test-commit:
 	git commit -m "test commit" --allow-empty
 empty-commit:
