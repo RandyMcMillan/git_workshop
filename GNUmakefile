@@ -14,7 +14,7 @@ test-commit:
 empty-commit:
 	GIT_AUTHOR_DATE="Thu, 01 Jan 1970 00:00:00 +0000" GIT_COMMITTER_DATE="Thu, 01 Jan 1970 00:00:00 +0000" git commit --allow-empty -m 'empty commit'
 install:
-	apt-get install make || brew install make || winget install ezwinports.make
+	apt-get install make pandoc || brew install make pandoc || winget install ezwinports.make && winget install -e --id JohnMacFarlane.Pandoc
 submodules:
 	git submodule update --init --recursive
 branch:
