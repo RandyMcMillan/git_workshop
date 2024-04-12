@@ -17,3 +17,6 @@ submodules:
 branch:
 	git checkout -b topic-branch-$(shell date +%s) || git checkout -b topic-branch-$^
 	git branch -a
+push:push--all-f
+push--all-f:
+	git push --all -f
