@@ -1,2 +1,47 @@
 <h3 id="git_workshop">git_workshop</h3>
 <hr />
+<h3 id="git_workshop">git_workshop</h3>
+<pre><code>SHELL := $(shell which bash)
+default:
+     git branch --set-upstream-to=origin/master master
+     git remote add upstream git@github.com:RandyMcMillan/git_workshop.git 2&gt;/dev/null || \
+         git remote add upstream https://github.com/RandyMcMillan/git_workshop.git 2&gt;/dev/null || \
+         true
+tag:
+    ## remove shell from commands to use in the terminal
+    git tag -f $(shell git rev-parse --short HEAD~1)-$(shell date +%s)
+tags-delete:
+    for t in $(shell git tag);do git tag -d $$t;done
+test-commit:
+    git commit -m &quot;test commit&quot; --allow-empty
+empty-commit:
+    GIT_AUTHOR_DATE=&quot;Thu, 01 Jan 1970 00:00:00 +0000&quot; GIT_COMMITTER_DATE=&quot;Thu, 01 Jan 1970 00:00:00 +0000&quot; git commit --allow-empty -m &#39;empty commit&#39;
+install:
+    apt-get install make || brew install make || winget install ezwinports.make
+submodules:
+    git submodule update --init --recursive
+branch:
+    git checkout -b topic-branch-$(shell date +%s) || git checkout -b topic-branch-$^
+    #git branch -a
+branch-sort: branch
+     git branch -a | sort || true
+push:push--all-f
+push--all-f:
+    git push --all -f
+readme:empty-commit
+    echo &gt;&gt; README.md
+    echo $(shell git rev-parse --short HEAD~1) &gt;&gt; README.md
+    echo $@  &gt;&gt; README.md
+    echo &gt;&gt; README.md
+    git add README.md
+    $(MAKE) test-commit
+    $(MAKE) branch tag
+index:readme
+    pandoc README.md --from markdown --to html &gt;&gt; index.html
+serve:server
+server:
+     source .functions &amp;&amp; server</code></pre>
+<p>8a26022 readme</p>
+<p>9cdd33e readme</p>
+<p>296a578 readme</p>
+<p>bef6bf1 readme</p>
