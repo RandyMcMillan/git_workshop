@@ -22,3 +22,5 @@ branch-sort: branch
 push:push--all-f
 push--all-f:
 	git push --all -f
+readme:
+	echo $(shell git rev-parse --short HEAD~1) >> README.md
