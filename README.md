@@ -1,5 +1,7 @@
 ### git_workshop
 
+Here is my edit in the middle of a rebase
+
 ```
 SHELL := $(shell which bash)
 default:
